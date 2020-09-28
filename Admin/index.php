@@ -8,7 +8,7 @@
     <title>Admin Dashboard</title>
 
     <style>
-        table{
+        body{
             margin:50px;
         }
     </style>
@@ -17,34 +17,61 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Description</th>
-                            <th>Editing</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>123</td>
-                            <td>sdafsdfsdf</td>
-                            <td>123dsafsdfsf</td>
-                        </tr>
+                
 
-                        <tr>
-                            <td>123</td>
-                            <td>sdafsdfsdf</td>
-                            <td>123dsafsdfsf</td>
-                        </tr>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                        <div class="col-md-6">
+                            <div class="card-title">Post List</div>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="post-create.php" class="float-right btn btn-primary"> + Add Post</a>
+                        </div>
+                        </div>
+                    </div>
 
-                        <tr>
-                            <td>123</td>
-                            <td>sdafsdfsdf</td>
-                            <td>123dsafsdfsf</td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <div class="card-body">
+                    <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>123</td>
+                                    <td>sdafsdfsdf</td>
+                                    <td>123dsafsdfsf</td>
+                                    <td>
+                                        <a href="">Edit</a> | <a href="">Delete</a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>123</td>
+                                    <td>sdafsdfsdf</td>
+                                    <td>123dsafsdfsf</td>
+                                    <td>
+                                        <a href="">Edit</a> | <a href="">Delete</a>
+                                    </td>
+                                </tr>
+
+                                <tr>    
+                                    <td>123</td>
+                                    <td>sdafsdfsdf</td>
+                                    <td>123dsafsdfsf</td>
+                                    <td>
+                                        <a href="">Edit</a> | <a href="">Delete</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                     </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
