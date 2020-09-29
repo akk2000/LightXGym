@@ -14,6 +14,19 @@
     </style>
 </head>
 <body>
+
+<?php
+    require "db_connect.php";
+    if(isset($_POST['post_create_btn'])){
+
+    $tit = $_POST['title'];
+    $desc = $_POST['description'];
+
+    $db_query = "INSERT INTO posts(title,description) VALUES('$tit','$desc')"; 
+
+    mysqli_query($db, $db_query);
+    }
+?>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -30,24 +43,24 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="card-body"> 
-                        <form action="">
+                <form action="post-create.php" method="POST">
+                    <div class="card-body">                       
                             <div class="form-group">
                                 <label for="">Title</label>
-                                <input type="text" class="form-control" placeholder="Title">
+                                <input type="text" class="form-control" placeholder="Title" name="title">
                             </div>
 
                             <div class="form-group">
                                 <label for="">Description</label>
-                                <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+                                <textarea name="description" id="" cols="30" rows="10" class="form-control" ></textarea>
                             </div>
-                        </form>     
+                             
                     </div>
 
                     <div class="card-footer">
-                        <button class="btn btn-primary">Create</button>
+                        <button class="btn btn-primary" name="post_create_btn">Create</button>
                     </div>
+                </form>
                 </div>
             </div>
         </div>
