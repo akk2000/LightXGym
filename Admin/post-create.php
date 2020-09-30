@@ -17,15 +17,26 @@
 
 <?php
     require "db_connect.php";
+    $titleError='';
+    $descError='';
+
     if(isset($_POST['post_create_btn'])){
 
     $tit = $_POST['title'];
     $desc = $_POST['description'];
-
     $db_query = "INSERT INTO posts(title,description) VALUES('$tit','$desc')"; 
 
-    mysqli_query($db, $db_query);
+    if(empty($tit)){
+        $titleError = "Title field is required";
+    } if(empty($desc)){
+        $descError = "Description fields is required";
     }
+        
+    if(!empty($tit && $desc)){
+        mysqli_query($db, $db_query);
+        header('location:index.php');
+    }
+}
 ?>
     <div class="container">
         <div class="row">
@@ -47,12 +58,14 @@
                     <div class="card-body">                       
                             <div class="form-group">
                                 <label for="">Title</label>
-                                <input type="text" class="form-control" placeholder="Title" name="title">
+                                <input type="text" class="form-control <?php if($titleError !== '') : ?>is-invalid <?php endif ?>" placeholder="Title" name="title" value ="">
+                                <span class="text-danger"><?php echo $titleError ?></span>
                             </div>
 
                             <div class="form-group">
                                 <label for="">Description</label>
-                                <textarea name="description" id="" cols="30" rows="10" class="form-control" ></textarea>
+                                <textarea name="description" class="form-control <?php if(!empty($descError)) :?> is-invalid <?php endif ?> " placeholder="Description.."></textarea>
+                                <span class="text-danger"><?php echo $descError ?></span>
                             </div>
                              
                     </div>
