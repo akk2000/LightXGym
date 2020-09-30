@@ -1,3 +1,7 @@
+<?php
+    require "db_connect.php";
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +36,17 @@
                     </div>
 
                     <div class="card-body">
+                    <?php if(isset($_SESSION['successMessage'])): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <?php 
+                        echo  $_SESSION["successMessage"];     
+                        unset ($_SESSION["successMessage"]);                
+                        ?>
+                        <button type="button" class="close" data-dismiss="alert">  
+                            <span>&times;</span>
+                        </button>
+                        </div>
+                    <?php endif ?>
                     <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -42,32 +57,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>123</td>
-                                    <td>sdafsdfsdf</td>
-                                    <td>123dsafsdfsf</td>
-                                    <td>
-                                        <a href="">Edit</a> | <a href="">Delete</a>
-                                    </td>
-                                </tr>
 
+                            <?php 
+                            $selectQuery = "SELECT * FROM posts";
+                            $result = mysqli_query($db,$selectQuery);
+                            foreach($result as $post){
+                            ?>
                                 <tr>
-                                    <td>123</td>
-                                    <td>sdafsdfsdf</td>
-                                    <td>123dsafsdfsf</td>
+                                    <td><?php echo $post['id'] ?></td>
+                                    <td><?php echo $post['title'] ?></td>
+                                    <td><?php echo $post['description'] ?></td>
                                     <td>
-                                        <a href="">Edit</a> | <a href="">Delete</a>
+                                        <a href="post_edit.php?postId=<?php echo $post['id']; ?>">Edit</a> | <a href="">Delete</a>
                                     </td>
                                 </tr>
-
-                                <tr>    
-                                    <td>123</td>
-                                    <td>sdafsdfsdf</td>
-                                    <td>123dsafsdfsf</td>
-                                    <td>
-                                        <a href="">Edit</a> | <a href="">Delete</a>
-                                    </td>
-                                </tr>
+                            <?php
+                            } 
+                            ?>
+                                
                             </tbody>
                      </table>
                     </div>

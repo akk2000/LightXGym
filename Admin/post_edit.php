@@ -1,5 +1,6 @@
 <?php 
     session_start();
+    require "db_connect.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,30 +18,18 @@
     </style>
 </head>
 <body>
-
 <?php
-    require "db_connect.php";
-    $titleError='';
-    $descError='';
+    if(isset($_GET['postId'])){
+        $postIdToUpdate = $_GET['postId'];
+        $post = mysqli_query($db, "SELECT * FROM posts WHERE id=$postIdToUpdate");
 
-    if(isset($_POST['post_create_btn'])){
-
-    $tit = $_POST['title'];
-    $desc = $_POST['description'];
-    $db_query = "INSERT INTO posts(title,description) VALUES('$tit','$desc')"; 
-
-    if(empty($tit)){
-        $titleError = "Title field is required";
-    }if(empty($desc)){
-        $descError = "Description fields is required";
+        if(mysqli_num_rows($post) == 1){
+            foreach($post as $row){
+                $title = $row['title'];
+                $desc = $row['description'];
+            }
+        }
     }
-        
-    if(!empty($tit && $desc)){
-        mysqli_query($db, $db_query);
-        $_SESSION["successMessage"] = "Post created Successfully";
-        header('location:index.php');
-    }
-}
 ?>
     <div class="container">
         <div class="row">
@@ -62,14 +51,14 @@
                     <div class="card-body">                       
                             <div class="form-group">
                                 <label for="">Title</label>
-                                <input type="text" class="form-control <?php if(!empty($titleError)) : ?>is-invalid <?php endif ?>" placeholder="Title" name="title" value ="">
-                                <span class="text-danger"><?php echo $titleError ?></span>
+                                <input type="text" class="form-control <?php if(!empty($titleError)) : ?>is-invalid <?php endif ?>" placeholder="Title" name="title" value ="<?php echo $title ?> ">
+                                
                             </div>
 
                             <div class="form-group">
                                 <label for="">Description</label>
-                                <textarea name="description" class="form-control <?php if(!empty($descError)) :?> is-invalid <?php endif ?> " placeholder="Description.."></textarea>
-                                <span class="text-danger"><?php echo $descError ?></span>
+                                <textarea name="description" class="form-control <?php if(!empty($descError)) :?> is-invalid <?php endif ?> " placeholder="Description.."><?php echo $desc ?></textarea>
+                                
                             </div>
                              
                     </div>
