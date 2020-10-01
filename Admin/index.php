@@ -18,11 +18,18 @@
     </style>
 </head>
 <body>
+<?php
+    if(isset($_GET['post_id_to_delete'])){
+        $post_id_to_delete = $_GET['post_id_to_delete'];
+        $deleteQuery = "DELETE FROM posts WHERE id = $post_id_to_delete";
+        mysqli_query($db,$deleteQuery);
+        $_SESSION["successMessage"] = "A post deleted Successfully";
+        header('location:index.php');
+    }
+?>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                
-
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
@@ -68,7 +75,8 @@
                                     <td><?php echo $post['title'] ?></td>
                                     <td><?php echo $post['description'] ?></td>
                                     <td>
-                                        <a href="post_edit.php?postId=<?php echo $post['id']; ?>">Edit</a> | <a href="">Delete</a>
+                                        <a href="post_edit.php?postId=<?php echo $post['id']; ?>">Edit</a> | 
+                                        <a href="index.php?post_id_to_delete=<?php echo $post['id']; ?>" >Delete</a>
                                     </td>
                                 </tr>
                             <?php
