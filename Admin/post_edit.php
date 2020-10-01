@@ -30,6 +30,27 @@
             }
         }
     }
+    $titleError= '';
+    $descError = '';
+    if(isset($_POST['update_post_btn'])){
+        $postId = $_POST['postId'];
+        $title = $_POST['title'];
+       $desc = $_POST['description'];
+        $Updatequery = "UPDATE posts SET title='$title', description='$desc' WHERE id = $postId";
+
+        if(empty($title)){
+            $titleError = "Title field is required";
+        }if(empty($desc)){
+            $descError = "Description Field is required";
+        }
+
+        if(!empty($title && $desc)){
+            mysqli_query($db,$Updatequery);
+            $_SESSION["successMessage"] = "Post Updated Successfully";
+            header('location:index.php');
+        }
+    }
+
 ?>
     <div class="container">
         <div class="row">
@@ -40,31 +61,34 @@
                     <div class="card-header">
                     <div class="row">
                             <div class="col-md-6">
-                                <div class="card-title">Post Creation</div>
+                                <div class="card-title">Post Update</div>
                             </div>
                             <div class="col-md-6">
                                 <a href="index.php" class="float-right btn btn-secondary"> << Back</a>
                             </div>
                         </div>
                     </div>
-                <form action="post-create.php" method="POST">
+                <form action="post_edit.php" method="POST">
                     <div class="card-body">                       
                             <div class="form-group">
+                                <input type="hidden" name="postId" value="<?php echo $postIdToUpdate; ?>"> <br>
                                 <label for="">Title</label>
                                 <input type="text" class="form-control <?php if(!empty($titleError)) : ?>is-invalid <?php endif ?>" placeholder="Title" name="title" value ="<?php echo $title ?> ">
+                                <span class="text-danger"><?php echo $titleError ?></span>
                                 
                             </div>
 
                             <div class="form-group">
                                 <label for="">Description</label>
                                 <textarea name="description" class="form-control <?php if(!empty($descError)) :?> is-invalid <?php endif ?> " placeholder="Description.."><?php echo $desc ?></textarea>
+                                    <span class="text-danger"><?php echo $descError ?></span>
                                 
                             </div>
                              
                     </div>
 
                     <div class="card-footer">
-                        <button class="btn btn-primary" name="post_create_btn">Create</button>
+                        <button class="btn btn-primary" name="update_post_btn">Update</button>
                     </div>
                 </form>
                 </div>
