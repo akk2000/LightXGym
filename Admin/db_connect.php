@@ -2,7 +2,7 @@
     $server = "localhost";
     $server_name = "root";
     $pass = "";
-    $db_name = "basic_crud";
+    $db_name = "lightxgym";
 
     $db = mysqli_connect($server,$server_name,$pass,$db_name);
 

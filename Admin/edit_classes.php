@@ -21,33 +21,38 @@
 <?php
     if(isset($_GET['postId'])){
         $postIdToUpdate = $_GET['postId'];
-        $post = mysqli_query($db, "SELECT * FROM posts WHERE id=$postIdToUpdate");
+        $post = mysqli_query($db, "SELECT * FROM classes WHERE id=$postIdToUpdate");
 
         if(mysqli_num_rows($post) == 1){
             foreach($post as $row){
-                $title = $row['title'];
-                $desc = $row['description'];
+                $category = $row['category'];
+                $price = $row['price'];
+                $instructor = $row['instructor'];
             }
         }
     }
-    $titleError= '';
-    $descError = '';
-    if(isset($_POST['update_post_btn'])){
+    $categoryError= '';
+    $priceError = '';
+    $instructorError = '';
+    if(isset($_POST['update_class_btn'])){
         $postId = $_POST['postId'];
-        $title = $_POST['title'];
-       $desc = $_POST['description'];
-        $Updatequery = "UPDATE posts SET title='$title', description='$desc' WHERE id = $postId";
+        $category = $_POST['category'];
+       $price = $_POST['price'];
+       $instructor = $_POST['instructor'];
+        $Updatequery = "UPDATE classes SET category='$category', price='$price', instructor='$instructor' WHERE id = $postId";
 
-        if(empty($title)){
-            $titleError = "Title field is required";
-        }if(empty($desc)){
-            $descError = "Description Field is required";
+        if(empty($category)){
+            $categoryError = "Category field is required";
+        }if(empty($price)){
+            $priceError = "Price fields is required";
+        }if(empty($instructor)){
+            $instructorError = "Instructor fields is required";
         }
 
-        if(!empty($title && $desc)){
+        if(!empty($category && $price && $instructor )){
             mysqli_query($db,$Updatequery);
             $_SESSION["successMessage"] = "Post Updated Successfully";
-            header('location:index.php');
+            header("location:classes.php");
         }
     }
 
@@ -61,34 +66,41 @@
                     <div class="card-header">
                     <div class="row">
                             <div class="col-md-6">
-                                <div class="card-title">Post Update</div>
+                                <div class="card-title">Classes Update</div>
                             </div>
                             <div class="col-md-6">
-                                <a href="index.php" class="float-right btn btn-secondary"> << Back</a>
+                                <a href="classes.php" class="float-right btn btn-secondary"> << Back</a>
                             </div>
                         </div>
                     </div>
-                <form action="post_edit.php" method="POST">
+                <form action="edit_classes.php" method="POST">
                     <div class="card-body">                       
                             <div class="form-group">
                                 <input type="hidden" name="postId" value="<?php echo $postIdToUpdate; ?>"> <br>
-                                <label for="">Title</label>
-                                <input type="text" class="form-control <?php if(!empty($titleError)) : ?>is-invalid <?php endif ?>" placeholder="Title" name="title" value ="<?php echo $title ?> ">
-                                <span class="text-danger"><?php echo $titleError ?></span>
+                                <label for="">Category</label>
+                                <input type="text" class="form-control <?php if(!empty($categoryError)) : ?>is-invalid <?php endif ?>" placeholder="Category" name="category" value =" <?php echo $category ?>">
+                                <span class="text-danger"><?php echo $categoryError ?></span>
                                 
                             </div>
 
                             <div class="form-group">
-                                <label for="">Description</label>
-                                <textarea name="description" class="form-control <?php if(!empty($descError)) :?> is-invalid <?php endif ?> " placeholder="Description.."><?php echo $desc ?></textarea>
-                                    <span class="text-danger"><?php echo $descError ?></span>
+                                <label for="">Price</label>
+                                <input type="text" class="form-control <?php if(!empty($priceError)) : ?>is-invalid <?php endif ?>" placeholder="Price" name="price" value =" <?php echo $price ?>">
+                                    <span class="text-danger"><?php echo $priceError ?></span>
+                                
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Instructor</label>
+                                <input type="text" class="form-control <?php if(!empty($instructorError)) : ?>is-invalid <?php endif ?>" placeholder="Price" name="instructor" value =" <?php echo $instructor ?>">
+                                <span class="text-danger"><?php echo $instructorError ?></span>
                                 
                             </div>
                              
                     </div>
 
                     <div class="card-footer">
-                        <button class="btn btn-primary" name="update_post_btn">Update</button>
+                        <button class="btn btn-primary" name="update_class_btn">Update</button>
                     </div>
                 </form>
                 </div>

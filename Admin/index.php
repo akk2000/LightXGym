@@ -1,99 +1,48 @@
-<?php
-    require "db_connect.php";
-    session_start();
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="../style.css">
 
-    <title>Admin Dashboard</title>
 
-    <style>
-        body{
-            margin:50px;
-        }
-    </style>
-</head>
-<body>
-<?php
-    if(isset($_GET['post_id_to_delete'])){
-        $post_id_to_delete = $_GET['post_id_to_delete'];
-        $deleteQuery = "DELETE FROM posts WHERE id = $post_id_to_delete";
-        mysqli_query($db,$deleteQuery);
-        $_SESSION["successMessage"] = "A post deleted Successfully";
-        header('location:index.php');
-    }
-?>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="card-title">Post List</div>
-                            </div>
-                            <div class="col-md-6">
-                                <a href="post-create.php" class="float-right btn btn-primary"> + Add Post</a>
-                            </div>
-                        </div>
-                    </div>
+   <div id="wrapper">
 
-                    <div class="card-body">
-                    <?php if(isset($_SESSION['successMessage'])): ?>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <?php 
-                        echo  $_SESSION["successMessage"];     
-                        unset ($_SESSION["successMessage"]);                
-                        ?>
-                        <button type="button" class="close" data-dismiss="alert">  
-                            <span>&times;</span>
-                        </button>
-                        </div>
-                    <?php endif ?>
-                    <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            <?php 
-                            $selectQuery = "SELECT * FROM posts";
-                            $result = mysqli_query($db,$selectQuery);
-                            foreach($result as $post){
-                            ?>
-                                <tr>
-                                    <td><?php echo $post['id'] ?></td>
-                                    <td><?php echo $post['title'] ?></td>
-                                    <td><?php echo $post['description'] ?></td>
-                                    <td>
-                                        <a href="post_edit.php?postId=<?php echo $post['id']; ?>">Edit</a> | 
-                                        <a href="index.php?post_id_to_delete=<?php echo $post['id']; ?>" >Delete</a>
-                                    </td>
-                                </tr>
-                            <?php
-                            } 
-                            ?>
-                                
-                            </tbody>
-                     </table>
-                    </div>
-                </div>
-            </div>
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Start Bootstrap
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li>
+                    <a href="classes.php">Classes</a>
+                </li>
+                <li>
+                    <a href="#">Overview</a>
+                </li>
+                <li>
+                    <a href="#">Events</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Services</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
         </div>
+
+
     </div>
 
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-</body>
-</html>
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
