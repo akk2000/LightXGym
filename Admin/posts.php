@@ -63,10 +63,10 @@ $("#wrapper").toggleClass("toggled");
 <?php
     if(isset($_GET['post_id_to_delete'])){
         $post_id_to_delete = $_GET['post_id_to_delete'];
-        $deleteQuery = "DELETE FROM classes WHERE id = $post_id_to_delete";
+        $deleteQuery = "DELETE FROM posts WHERE id = $post_id_to_delete";
         mysqli_query($db,$deleteQuery);
         $_SESSION["successMessage"] = "A post deleted Successfully";
-        header('location:classes.php');
+        header('location:posts.php');
     }
 ?>
     <div class="container content">
@@ -76,10 +76,10 @@ $("#wrapper").toggleClass("toggled");
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="card-title">Classes List</div>
+                                <div class="card-title">Posts List</div>
                             </div>
                             <div class="col-md-6">
-                                <a href="create_classes.php" class="float-right btn btn-primary"> + Add Classes</a>
+                                <a href="post-create.php" class="float-right btn btn-primary"> + Add posts</a>
                             </div>
                         </div>
                     </div>
@@ -100,26 +100,28 @@ $("#wrapper").toggleClass("toggled");
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Action</th>
+                                    <th>Image</th>
+                                    <th>Author</th>
+                                    <th>Date</th>
+                                    <th>Content</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                             <?php 
-                            $selectQuery = "SELECT * FROM classes";
+                            $selectQuery = "SELECT * FROM posts";
                             $result = mysqli_query($db,$selectQuery);
                             foreach($result as $post){
                             ?>
                                 <tr>
                                     <td><?php echo $post['id'] ?></td>
-                                    <td><?php echo $post['category'] ?></td>
-                                    <td><?php echo $post['price'] ?></td>
-                                    <td><?php echo $post['instructor'] ?></td>
+                                    <td><?php echo $post['image'] ?></td>
+                                    <td><?php echo $post['author'] ?></td>
+                                    <td><?php echo $post['date'] ?></td>
+                                    <td><?php echo $post['content'] ?></td>
                                     <td>
-                                        <a href="edit_classes.php?postId=<?php echo $post['id']; ?>">Edit</a> | 
-                                        <a href="classes.php?post_id_to_delete=<?php echo $post['id']; ?>" onclick="return confirm('Are you Sure want to delete?')" >Delete</a>
+                                        <a href="edit_post.php?postId=<?php echo $post['id']; ?>">Edit</a> | 
+                                        <a href="posts.php?post_id_to_delete=<?php echo $post['id']; ?>" onclick="return confirm('Are you Sure want to delete?')" >Delete</a>
                                     </td>
                                 </tr>
                             <?php
