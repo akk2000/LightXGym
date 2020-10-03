@@ -5,18 +5,19 @@
 
 
    <div id="wrapper">
-
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-
+                <li class="sidebar-brand">
+                    <a href="dashboard.php">Dashboard</a>
+                </li>              
                 <li>
-                    <a href="posts.php">Posts</a>
+                    <a href="admin_posts.php">Posts</a>
                 </li>
                 <li>
-                    <a href="classes.php">Classes</a>
+                    <a href="admin_classes.php">Classes</a>
                 </li>
                 <li>
-                    <a href="#">Overview</a>
+                    <a href="inventory.php">Inventory</a>
                 </li>
                 <li>
                     <a href="#">Events</a>
@@ -32,8 +33,6 @@
                 </li>
             </ul>
         </div>
-
-
     </div>
 
     <script>
@@ -42,3 +41,12 @@
         $("#wrapper").toggleClass("toggled");
     });
     </script>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-danger text-center">WELCOME FROM ADMIN DASHBOARD</h1>
+            </div>
+        </div>
+    </div>
+    

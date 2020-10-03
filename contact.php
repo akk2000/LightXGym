@@ -10,17 +10,19 @@
 <body>
     <!-- Navigation -->
  <div class="container navigation">
-        <div class="col-md-6">
-            <img src="img/logo.png" alt="" class="logoimg img-fluid">
-        </div>
-        <div class="col-md-6">
+            <div class="col-md-5">
+                <img src="img/logo.png" alt="" class="logoimg img-fluid">
+            </div>
+            <div class="col-md-7">
             <ul class="list-inline">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="gallary.html">Shop</a></li>
+                <li><a href="gallary.php">Shop</a></li>
                 <Li><a href="login.html" target="_blank">Log In</a></Li>
-                <li><a href="classes.html">Classes</a></li>
-                <li><a href="blog.html">Blog</a></li>
+                <li><a href="classes.php">Classes</a></li>
+                <li><a href="blog.php">Blog</a></li>
+                <li><a href="admin/dashboard.php">Admin</a></li>
+                
             </ul>
         </div>
  </div>

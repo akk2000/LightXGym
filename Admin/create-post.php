@@ -26,28 +26,28 @@ session_start();
         if(isset($_POST['post_create_btn'])){
 
             $image = $_FILES['image']['name'];
-            $image_temp = $_FILES['image']['temp_name'];
+            $image_temp = $_FILES['image']['tmp_name'];
             $author = $_POST['author'];
             $content = $_POST['content'];
             move_uploaded_file($image_temp,"../upload/$image");
 
-            echo $image; 
-            // $insert_query = "INSERT INTO posts(image,author,content) VALUES('$image','$author','$content')";
+            // echo $image_temp; 
+            $insert_query = "INSERT INTO posts(image,author,content) VALUES('$image','$author','$content')";
             
 
-            // if(empty($image)){
-            //     $imageError = "Image field is required";
-            // }if(empty($author)){
-            //     $authorError = "Author fields is required";
-            // }if(empty($content)){
-            //     $contentError = "Content fields is required";
-            // }
+            if(empty($image)){
+                $imageError = "Image field is required";
+            }if(empty($author)){
+                $authorError = "Author fields is required";
+            }if(empty($content)){
+                $contentError = "Content fields is required";
+            }
 
-            // if(!empty($image && $author && $content )){
-            //     mysqli_query($db, $insert_query);
-            //     $_SESSION["successMessage"] = "Post created Successfully";
-            //     header("location:post-create.php");
-            // }
+            if(!empty($image && $author && $content )){
+                mysqli_query($db, $insert_query);
+                $_SESSION["successMessage"] = "Post created Successfully";
+                header("location:posts.php");
+            }
         }
     ?>
 

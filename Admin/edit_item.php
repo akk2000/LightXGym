@@ -19,40 +19,46 @@
 </head>
 <body>
 <?php
-    if(isset($_GET['postId'])){
-        $postIdToUpdate = $_GET['postId'];
-        $post = mysqli_query($db, "SELECT * FROM posts WHERE id=$postIdToUpdate");
+    if(isset($_GET['itemId'])){
+        $itemIdToUpdate = $_GET['itemId'];
+        $post = mysqli_query($db, "SELECT * FROM inventory WHERE id=$itemIdToUpdate");
 
         if(mysqli_num_rows($post) == 1){
             foreach($post as $row){
-                $image = $row['image'];
-                $author = $row['author'];
-                $content = $row['content'];
+                $image = $row['item_image'];
+                $title = $row['item_title'];
+                $price = $row['price'];
             }
         }
     }
+
+
     $imageError='';
-    $authorError='';
-    $contentError='';
-    if(isset($_POST['update_post_btn'])){
-        $postId = $_POST['postId'];
-        $image = $_POST['image'];
-        $author = $_POST['author'];
-        $content = $_POST['content'];
-        $Updatequery = "UPDATE posts SET image='$image', author='$author', content='$content' WHERE id = $postId";
+    $titleError='';
+    $priceError='';
+    if(isset($_POST['update_item_btn'])){
+        $itemId = $_POST['itemId'];
+
+        $image = $_FILES['image']['name'];
+        $image_temp = $_FILES['image']['tmp_name'];
+        move_uploaded_file($image_temp,"../upload/$item_image");
+        $title = $_POST['title'];
+        $price = $_POST['price'];
+        
+        $Updatequery = "UPDATE inventory SET item_image='$image', item_title='$title', price='$price' WHERE id = $itemId";
 
         if(empty($image)){
             $imageError = "Image field is required";
-        }if(empty($author)){
-            $authorError = "Author fields is required";
-        }if(empty($content)){
-            $contentError = "Content fields is required";
+        }if(empty($title)){
+            $titleError = "Title fields is required";
+        }if(empty($price)){
+            $priceError = "Price fields is required";
         }
 
-        if(!empty($image && $author && $content )){
+        if(!empty($image && $title && $price )){
             mysqli_query($db, $Updatequery);
             $_SESSION["successMessage"] = "Post created Successfully";
-            header("location:admin_posts.php");
+            header("location:inventory.php");
         }
     }
 
@@ -66,18 +72,18 @@
                     <div class="card-header">
                     <div class="row">
                             <div class="col-md-6">
-                                <div class="card-title">Classes Update</div>
+                                <div class="card-title">Item Update</div>
                             </div>
                             <div class="col-md-6">
-                                <a href="classes.php" class="float-right btn btn-secondary"> << Back</a>
+                                <a href="inventory.php" class="float-right btn btn-secondary"> << Back</a>
                             </div>
                         </div>
                     </div>
-                <form action="edit_post.php" method="POST">
+                <form action="edit_item.php" method="POST" enctype="multipart/form-data">
                     <div class="card-body">                       
                             <div class="form-group">
-                                <input type="hidden" name="postId" value="<?php echo $postIdToUpdate; ?>"> <br>
-                                
+                                <input type="hidden" name="itemId" value="<?php echo $itemIdToUpdate; ?>"> <br>
+
                                 <label for="">Image</label>
                                 <input type="file" class=" <?php if(!empty($imageError)) : ?>is-invalid <?php endif ?> " placeholder="" name="image" value ="<?php echo $image ?>">                                   
                                 <span class="text-danger"><?php echo $imageError ?></span>
@@ -85,25 +91,25 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="">Author</label>
-                                <input type="text" class="form-control <?php if(!empty($authorError)) : ?>is-invalid <?php endif ?> " placeholder="Author" name="author" value ="<?php echo $author ?>"> 
+                                <label for="">Title</label>
+                                <input type="text" class="form-control <?php if(!empty($titleError)) : ?>is-invalid <?php endif ?> " placeholder="Author" name="title" value ="<?php echo $title ?>"> 
                                     
-                                    <span class="text-danger"><?php echo $authorError ?></span>
+                                    <span class="text-danger"><?php echo $titleError ?></span>
                                 
                             </div>
 
                             <div class="form-group">
-                                <label for="">Content</label>
-                                <textarea name="content" class="form-control <?php if(!empty($contentError)) : ?>is-invalid <?php endif ?> " placeholder="Content"><?php echo $content ?></textarea> 
+                                <label for="">Price</label>
+                                <textarea name="price" class="form-control <?php if(!empty($priceError)) : ?>is-invalid <?php endif ?> " placeholder="Price"><?php echo $price ?></textarea> 
                                     
-                                <span class="text-danger"><?php echo $contentError ?></span>
+                                <span class="text-danger"><?php echo $priceError ?></span>
                                 
                             </div>
                              
                     </div>
 
                     <div class="card-footer">
-                        <button class="btn btn-primary" name="update_post_btn">Update</button>
+                        <button class="btn btn-primary" name="update_item_btn">Update</button>
                     </div>
                 </form>
                 </div>

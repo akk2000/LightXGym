@@ -26,32 +26,33 @@
 <div id="wrapper">
 
 <div id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-        <li>
-            <a href="posts.php">posts</a>
-        </li>
-        <li>
-            <a href="classes.php">Classes</a>
-        </li>
-        <li>
-            <a href="#">Overview</a>
-        </li>
-        <li>
-            <a href="#">Events</a>
-        </li>
-        <li>
-            <a href="#">About</a>
-        </li>
-        <li>
-            <a href="#">Services</a>
-        </li>
-        <li>
-            <a href="#">Contact</a>
-        </li>
-    </ul>
-</div>
-
-
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="dashboard.php">Dashboard</a>
+                </li>              
+                <li>
+                    <a href="admin_posts.php">Posts</a>
+                </li>
+                <li>
+                    <a href="admin_classes.php">Classes</a>
+                </li>
+                <li>
+                    <a href="inventory.php">Inventory</a>
+                </li>
+                <li>
+                    <a href="#">Events</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Services</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
 </div>
 
 <script>

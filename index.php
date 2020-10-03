@@ -16,13 +16,13 @@
         </div>
         <div class="col-md-7">
             <ul class="list-inline">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="gallary.html">Shop</a></li>
+                <li><a href="gallary.php">Shop</a></li>
                 <Li><a href="login.html" target="_blank">Log In</a></Li>
                 <li><a href="classes.php">Classes</a></li>
                 <li><a href="blog.php">Blog</a></li>
-                <li><a href="admin">Admin</a></li>
+                <li><a href="admin/dashboard.php">Admin</a></li>
                 
             </ul>
         </div>
@@ -37,13 +37,13 @@
  </div>
 
  <!-- BMI -->
-    <div class="BMI">
+    <!-- <div class="BMI">
         <div class="container">
         <div class="text-center">
             <iframe src="https://bmicalculatorusa.com/widgets/widget.php?t=550x480" width="550" height="480" frameborder="0"></iframe><p style=" font-family: sans-serif; font-size: 14px"></p>
         </div>
         </div>
-    </div>
+    </div> -->
 
 <!-- Instructor -->
     <div class="instructors">
