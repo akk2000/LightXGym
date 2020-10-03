@@ -24,24 +24,30 @@ session_start();
         $contentError='';
 
         if(isset($_POST['post_create_btn'])){
-            $image = $_POST['image'];
+
+            $image = $_FILES['image']['name'];
+            $image_temp = $_FILES['image']['temp_name'];
             $author = $_POST['author'];
             $content = $_POST['content'];
-            $insert_query = "INSERT INTO posts(image,author,content) VALUES('$image','$author','$content')";
-            
-            if(empty($image)){
-                $imageError = "Image field is required";
-            }if(empty($author)){
-                $authorError = "Author fields is required";
-            }if(empty($content)){
-                $contentError = "Content fields is required";
-            }
+            move_uploaded_file($image_temp,"../upload/$image");
 
-            if(!empty($image && $author && $content )){
-                mysqli_query($db, $insert_query);
-                $_SESSION["successMessage"] = "Post created Successfully";
-                header("location:posts.php");
-            }
+            echo $image; 
+            // $insert_query = "INSERT INTO posts(image,author,content) VALUES('$image','$author','$content')";
+            
+
+            // if(empty($image)){
+            //     $imageError = "Image field is required";
+            // }if(empty($author)){
+            //     $authorError = "Author fields is required";
+            // }if(empty($content)){
+            //     $contentError = "Content fields is required";
+            // }
+
+            // if(!empty($image && $author && $content )){
+            //     mysqli_query($db, $insert_query);
+            //     $_SESSION["successMessage"] = "Post created Successfully";
+            //     header("location:post-create.php");
+            // }
         }
     ?>
 
@@ -61,7 +67,7 @@ session_start();
                             </div>
                         </div>
                     </div>
-                <form action="post-create.php" method="POST">
+                <form action="post-create.php" method="POST" enctype="multipart/form-data">
                     <div class="card-body">                       
                             <div class="form-group">
                                 <label for="">Image</label><br>

@@ -10,7 +10,7 @@
             <ul class="sidebar-nav">
 
                 <li>
-                    <a href="post.php">Posts</a>
+                    <a href="posts.php">Posts</a>
                 </li>
                 <li>
                     <a href="classes.php">Classes</a>
