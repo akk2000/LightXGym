@@ -17,6 +17,48 @@
 
 </style>
 <body>
+<?php
+    require 'admin/db_connect.php';
+
+    $nameError='';
+    $emailError='';
+    $addressError='';
+    $passwordError='';
+    $confirmPasswordError='';
+
+    if(isset($_POST['register_btn'])){
+
+        $name = $_POST['name'];
+        $email= $_POST['email'];
+        $address = $_POST['address'];
+        $password = $_POST['password'];
+        $confirmPassword = $_POST['confirmPassword'];
+
+        if(empty($name)){
+            $nameError ="Name Field is require";
+        }if(empty($email)){
+            $emailError ="Email Field is require";
+        }if(empty($address)){
+            $addressError ="Address Field is require";
+        }if(empty($password)){
+            $passwordError ="Password Field is require";
+        }if(empty($confirmPassword)){
+            $confirmPasswordError ="Confirm Password Field is require";
+        }if($password != $confirmPassword){
+            $confirmPasswordError ="Password is not match";
+        }
+
+        if(!empty($name && $email && $address && $password && $confirmPassword) && $password==$confirmPassword){
+        $encrypted_password=md5($password);
+        $insert_query = "INSERT INTO user(name,email,address,password) VALUES('$name','$email','$address','$encrypted_password')";
+        mysqli_query($db,$insert_query);
+        header('location:login.php');
+        }
+
+        
+    }
+
+?>
 
     <!-- navigation -->
     <div class="loginpage-logo">
@@ -33,42 +75,57 @@
                         <div class="card-header">
                             <h4 class="text-center">Register</h4>
                         </div>
-
+                        <form action="register.php" method="POST">
                         <div class="card-body">
-                            <form action="">
+                            
                                 <div class="form-group">
                                     <label for="">Name</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control <?php if(!empty($nameError)){ ?> is-invalid <?php }?>" name="name" value="<?php
+                                            if(isset($_POST['register_btn']))
+                                            echo $name; 
+                                            ?>"  >
+                                    <span><?php echo $nameError; ?></span>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="">Email</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control <?php if(!empty($emailError)){ ?> is-invalid <?php }?>" name="email" value="<?php
+                                            if(isset($_POST['register_btn']))
+                                            echo $email; 
+                                            ?>"  >
+                                    <span><?php echo $emailError; ?></span>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="">Address</label>
-                                    <textarea name="address" rows="3" class="form-control"></textarea>
+                                    <textarea name="address" class="form-control <?php if(!empty($addressError)){ ?> is-invalid <?php }?>"><?php
+                                            if(isset($_POST['register_btn']))
+                                            echo $address; 
+                                            ?></textarea>
+                                    <span><?php echo $addressError; ?></span>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="">Password</label>
-                                    <input type="password" class="form-control">
+                                    <input type="password" class="form-control <?php if(!empty($passwordError)){ ?> is-invalid <?php }?>" name="password">
+                                    <span><?php echo $passwordError ?></span>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="">Confirm Password</label>
-                                    <input type="password" class="form-control">
+                                    <input type="password" class="form-control <?php if(!empty($confirmPasswordError)){ ?> is-invalid <?php }?>" name="confirmPassword">
+                                    <span><?php echo $confirmPasswordError ?></span>
                                 </div>
-                            </form>
+                            
                         </div>
 
                         <div class="card-footer">
-                            <button class="btn btn-primary">Register</button>
+                            <button class="btn btn-primary" name="register_btn">Register</button>
                             <span class="float-right">If you already have account.
                                 <a href="login.php">Login here</a>
                             </span>
                         </div>
+                        </form>
 
                     </div>
                 </div>

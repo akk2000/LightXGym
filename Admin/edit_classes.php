@@ -52,7 +52,7 @@
         if(!empty($category && $price && $instructor )){
             mysqli_query($db,$Updatequery);
             $_SESSION["successMessage"] = "Post Updated Successfully";
-            header("location:classes.php");
+            header("location:admin_classes.php");
         }
     }
 

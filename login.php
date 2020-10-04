@@ -1,3 +1,8 @@
+<?php
+    require "Admin/db_connect.php";
+    session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,13 +22,29 @@
 
 </style>
 <body>
+<?php
+    if(isset($_POST['login_btn'])){
+        $email = $_POST['email'];
+        $password = md5($_POST['password']);
+        $select_query = "SELECT * FROM user WHERE email='$email' AND password='$password'";
 
+        $user = mysqli_query($db,$select_query);
+        $user_count = mysqli_num_rows($user);
+
+        if($user_count === 1){
+            header('location:index.php');
+        }else{
+            echo "Username or password is incorrect.";
+        }
+    }
+?>
     <!-- navigation -->
     <div class="loginpage-logo">
         <img src="img/logo.png" alt="" class="logoimg img-fluid">
     </div>
 
     <!-- Register form -->
+    
         <div class="container">
             <div class="row">
                 <div class="col-md-3"></div>
@@ -33,29 +54,30 @@
                         <div class="card-header">
                             <h4 class="text-center">Login</h4>
                         </div>
-
+                    <form action="login.php" method="POST">
                         <div class="card-body">
-                            <form action="">                            
+                                                        
 
                                 <div class="form-group">
                                     <label for="">Email</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" name="email">
                                 </div>                               
 
                                 <div class="form-group">
                                     <label for="">Password</label>
-                                    <input type="password" class="form-control">
+                                    <input type="password" class="form-control" name="password">
                                 </div>
 
-                            </form>
+                            
                         </div>
 
                         <div class="card-footer">
-                            <button class="btn btn-primary">Register</button>
+                            <button class="btn btn-primary" name="login_btn">Login</button>
                             <span class="float-right">If you do not have account.
                                 <a href="register.php">register here</a>
                             </span>
                         </div>
+                    </form>
 
                     </div>
                 </div>

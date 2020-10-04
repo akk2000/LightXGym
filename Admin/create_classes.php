@@ -1,5 +1,5 @@
 <?php 
-session_start();
+    session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +40,7 @@ session_start();
             if(!empty($category && $price && $instructor )){
                 mysqli_query($db, $insert_query);
                 $_SESSION["successMessage"] = "Class created Successfully";
-                header("location:classes.php");
+                header("location:admin_classes.php");
             }
         }
     ?>
