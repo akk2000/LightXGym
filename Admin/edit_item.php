@@ -57,7 +57,7 @@
 
         if(!empty($image && $title && $price )){
             mysqli_query($db, $Updatequery);
-            $_SESSION["successMessage"] = "Post created Successfully";
+            $_SESSION["successMessage"] = "Item was updated Successfully";
             header("location:inventory.php");
         }
     }

@@ -40,7 +40,7 @@
                     <a href="inventory.php">Inventory</a>
                 </li>
                 <li>
-                    <a href="#">Events</a>
+                    <a href="admin_users.php">Users</a>
                 </li>
                 <li>
                     <a href="#">About</a>

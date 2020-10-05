@@ -46,7 +46,7 @@ session_start();
             if(!empty($image && $author && $content )){
                 mysqli_query($db, $insert_query);
                 $_SESSION["successMessage"] = "Post created Successfully";
-                header("location:posts.php");
+                header("location:admin_posts.php");
             }
         }
     ?>
@@ -67,7 +67,7 @@ session_start();
                             </div>
                         </div>
                     </div>
-                <form action="post-create.php" method="POST" enctype="multipart/form-data">
+                <form action="create-post.php" method="POST" enctype="multipart/form-data">
                     <div class="card-body">                       
                             <div class="form-group">
                                 <label for="">Image</label><br>

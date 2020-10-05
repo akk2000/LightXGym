@@ -41,7 +41,7 @@ session_start();
 
             if(!empty($item_image && $title && $price )){
                 mysqli_query($db, $insert_query);
-                $_SESSION["successMessage"] = "Class created Successfully";
+                $_SESSION["successMessage"] = "Item created Successfully";
                 header("location:inventory.php");
             }
         }

@@ -40,7 +40,7 @@
                     <a href="inventory.php">Inventory</a>
                 </li>
                 <li>
-                    <a href="#">Events</a>
+                    <a href="admin_users.php">Users</a>
                 </li>
                 <li>
                     <a href="#">About</a>
@@ -52,7 +52,7 @@
                     <a href="#">Contact</a>
                 </li>
             </ul>
-        </div>>
+        </div>
 </div>
 
 <script>
@@ -67,7 +67,7 @@ $("#wrapper").toggleClass("toggled");
         $item_id_to_delete = $_GET['item_id_to_delete'];
         $deleteQuery = "DELETE FROM inventory WHERE id = $item_id_to_delete";
         mysqli_query($db,$deleteQuery);
-        $_SESSION["successMessage"] = "A post deleted Successfully";
+        $_SESSION["successMessage"] = "A Item was deleted Successfully";
         header('location:inventory.php');
     }
 ?>
@@ -90,7 +90,7 @@ $("#wrapper").toggleClass("toggled");
 
                         <!-- Success Message -->
                     <?php if(isset($_SESSION['successMessage'])): ?>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <div class="alert alert-success alert-dismissible show" role="alert">
                         <?php 
                         echo  $_SESSION["successMessage"];     
                         unset ($_SESSION["successMessage"]);                

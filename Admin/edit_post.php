@@ -51,7 +51,7 @@
 
         if(!empty($image && $author && $content )){
             mysqli_query($db, $Updatequery);
-            $_SESSION["successMessage"] = "Post created Successfully";
+            $_SESSION["successMessage"] = "Post updated Successfully";
             header("location:admin_posts.php");
         }
     }

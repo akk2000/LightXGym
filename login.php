@@ -23,6 +23,7 @@
 </style>
 <body>
 <?php
+    $errorMessage= '';
     if(isset($_POST['login_btn'])){
         $email = $_POST['email'];
         $password = md5($_POST['password']);
@@ -32,9 +33,11 @@
         $user_count = mysqli_num_rows($user);
 
         if($user_count === 1){
-            header('location:index.php');
+            $user_array = mysqli_fetch_assoc($user);
+            $_SESSION['user_array'] = $user_array;
+            header('location:login_index.php');
         }else{
-            echo "Username or password is incorrect.";
+            $errorMessage = "Invalid Username or Password";
         }
     }
 ?>
@@ -56,8 +59,33 @@
                         </div>
                     <form action="login.php" method="POST">
                         <div class="card-body">
-                                                        
 
+                    <?php 
+                        if(!empty($errorMessage)): 
+                    ?>
+
+                        <div class="alert alert-danger alert-dismissible show" role="alert">
+                        <?php 
+                        echo $errorMessage;                
+                        ?>
+                        <button type="button" class="close" data-dismiss="alert">  
+                            <span>&times;</span>
+                        </button>
+                        </div>
+                    <?php endif ?>
+                                                        
+                    <?php if(isset($_SESSION['successMessage'])): ?>
+                        <div class="alert alert-success alert-dismissible show" role="alert">
+                        <?php 
+                        echo  $_SESSION["successMessage"];     
+                        unset ($_SESSION["successMessage"]);                
+                        ?>
+                        <button type="button" class="close" data-dismiss="alert">  
+                            <span>&times;</span>
+                        </button>
+                        </div>
+                    <?php endif ?>
+                    
                                 <div class="form-group">
                                     <label for="">Email</label>
                                     <input type="text" class="form-control" name="email">

@@ -1,7 +1,9 @@
 <?php
     session_start();
 
-
+    if(!isset($_SESSION['user_array'])){
+        header("location:login.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,22 +16,34 @@
     <title>Home</title>
 </head>
 <body>
+
+<?php
+    if(isset($_POST['btn_logout'])){
+        session_destroy();
+        header("location:login.php");
+    }
+?>
     <!-- Navigation -->
  <div class="container navigation">
-        <div class="col-md-5">
+        <div class="col-md-3">
             <img src="img/logo.png" alt="" class="logoimg img-fluid">
         </div>
-        <div class="col-md-7">
+        <div class="col-md-6">
             <ul class="list-inline">
                 <li><a href="index.php">Home</a></li>
                 <li><a href="contact.php">Contact</a></li>
                 <li><a href="gallary.php">Shop</a></li>
-                <Li><a href="login.php" target="_blank">Log In</a></Li>
                 <li><a href="classes.php">Classes</a></li>
-                <li><a href="blog.php">Blog</a></li>
-                <li><a href="admin/dashboard.php">Admin</a></li>
-                
+                <li><a href="blog.php">Blog</a></li>        
             </ul>
+        </div>
+        <div class="col-md-2">
+            <h6><?php echo "Username:" . $_SESSION['user_array']['name']; ?> </h6>
+        </div>
+        <div class="col-md-1">
+            <form action="login_index.php" method="POST">                   
+                    <button class="btn btn-danger btn-sm float-right" name="btn_logout" onclick="return confirm('Are you sure want to logout?');">Logout</button>
+            </form>
         </div>
  </div>
 
@@ -51,6 +65,7 @@
     </div> -->
 
 <!-- Instructor -->
+                <?php echo $_SESSION['user_array']['name']; ?>
     <div class="instructors">
         <div class="container">
             <h3 class="instructor-title">Instructors gods</h3>

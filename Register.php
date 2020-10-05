@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,6 +55,7 @@
         $encrypted_password=md5($password);
         $insert_query = "INSERT INTO user(name,email,address,password) VALUES('$name','$email','$address','$encrypted_password')";
         mysqli_query($db,$insert_query);
+        $_SESSION['successMessage'] = "Registered Successfully. Login Now!";
         header('location:login.php');
         }
 
