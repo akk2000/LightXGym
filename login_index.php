@@ -3,6 +3,10 @@
 
     if(!isset($_SESSION['user_array'])){
         header("location:login.php");
+    }else{
+        if($_SESSION['user_array']['role'] != 'user'){
+            header('location:admin/dashboard.php');
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -41,8 +45,8 @@
             <h6><?php echo "Username:" . $_SESSION['user_array']['name']; ?> </h6>
         </div>
         <div class="col-md-1">
-            <form action="login_index.php" method="POST">                   
-                    <button class="btn btn-danger btn-sm float-right" name="btn_logout" onclick="return confirm('Are you sure want to logout?');">Logout</button>
+            <form action="logout.php" method="GET">                   
+                    <button class="btn btn-danger btn-sm float-right"  onclick="return confirm('Are you sure want to logout?');">Logout</button>
             </form>
         </div>
  </div>

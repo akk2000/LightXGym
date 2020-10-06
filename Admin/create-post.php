@@ -1,5 +1,14 @@
-<?php 
-session_start();
+<?php
+
+    session_start();
+
+    if(!isset($_SESSION['user_array'])){
+        header("location:../login.php");
+    }else{
+        if($_SESSION['user_array']['role'] != 'admin'){
+            header('location:../login_index.php');
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">

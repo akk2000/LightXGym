@@ -1,4 +1,9 @@
 <?php
+    require "Admin/db_connect.php";
+    session_start();
+    
+?>
+<?php
 require "Admin/db_connect.php";
 ?>
 <!DOCTYPE html>

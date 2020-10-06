@@ -35,7 +35,12 @@
         if($user_count === 1){
             $user_array = mysqli_fetch_assoc($user);
             $_SESSION['user_array'] = $user_array;
-            header('location:login_index.php');
+            if($user_array['role'] == 'user'){
+                header('location:login_index.php');    
+            }else{
+                header('location:admin/dashboard.php');
+            }
+            
         }else{
             $errorMessage = "Invalid Username or Password";
         }

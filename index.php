@@ -1,7 +1,6 @@
 <?php
+    require "Admin/db_connect.php";
     session_start();
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
