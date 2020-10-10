@@ -1,5 +1,6 @@
 <?php
     session_start();
+    require "db_connect.php";
 
     if(!isset($_SESSION['user_array'])){
         header("location:../login.php");
@@ -24,6 +25,17 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
+
+<?php
+    $user_id = $_SESSION['user_array']['id'];
+    $query = "SELECT * FROM user WHERE id = $user_id";
+
+    $result = mysqli_query($db,$query);
+
+    if($result){
+        $user_array = mysqli_fetch_assoc($result);      
+    }
+?>
 <div id="wrapper">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
@@ -43,7 +55,7 @@
                     <a href="admin_users.php">Users</a>
                 </li>
                 <li>
-                    <a href="#">About</a>
+                    <a href="admin_adv_articles.php">Advanced Articles</a>
                 </li>
                 <li>
                     <a href="#">Services</a>
@@ -64,6 +76,7 @@
     });
     </script>
 
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -78,9 +91,9 @@
                         <div class="card-title text-center text-danger">Admin Info</div>
                     </div>
                     <div class="card-body">
-                        Current User :  <?php echo $_SESSION['user_array']['name'] ?><br>
-                        Address : <?php echo $_SESSION['user_array']['address'] ?><br>
-                        Role : <span class="badge badge-danger"><?php echo $_SESSION['user_array']['role'] ?><br></span><br>
+                        Current User :  <?php echo $user_array['name'] ?><br>
+                        Address : <?php echo $user_array['address'] ?><br>
+                        Role : <span class="badge badge-danger"><?php echo $user_array['role'] ?><br></span><br>
                         Email : contact@lightXgym.com
 
                     </div>

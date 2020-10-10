@@ -29,7 +29,7 @@
 <?php
     if(isset($_GET['postId'])){
         $postIdToUpdate = $_GET['postId'];
-        $post = mysqli_query($db, "SELECT * FROM posts WHERE id=$postIdToUpdate");
+        $post = mysqli_query($db, "SELECT * FROM advanced_posts WHERE id=$postIdToUpdate");
 
         if(mysqli_num_rows($post) == 1){
             foreach($post as $row){
@@ -47,7 +47,7 @@
         $image = $_POST['image'];
         $author = $_POST['author'];
         $content = $_POST['content'];
-        $Updatequery = "UPDATE posts SET image='$image', author='$author', content='$content' WHERE id = $postId";
+        $Updatequery = "UPDATE advanced_posts SET image='$image', author='$author', content='$content' WHERE id = $postId";
 
         if(empty($image)){
             $imageError = "Image field is required";
@@ -60,7 +60,7 @@
         if(!empty($image && $author && $content )){
             mysqli_query($db, $Updatequery);
             $_SESSION["successMessage"] = "Post updated Successfully";
-            header("location:admin_posts.php");
+            header("location:admin_adv_articles.php");
         }
     }
 
@@ -74,14 +74,14 @@
                     <div class="card-header">
                     <div class="row">
                             <div class="col-md-6">
-                                <div class="card-title">Classes Update</div>
+                                <div class="card-title">Articles Update</div>
                             </div>
                             <div class="col-md-6">
-                                <a href="admin_posts.php" class="float-right btn btn-secondary"> << Back</a>
+                                <a href="admin_adv_articles.php" class="float-right btn btn-secondary"> << Back</a>
                             </div>
                         </div>
                     </div>
-                <form action="edit_post.php" method="POST">
+                <form action="edit_adv_articles.php" method="POST">
                     <div class="card-body">                       
                             <div class="form-group">
                                 <input type="hidden" name="postId" value="<?php echo $postIdToUpdate; ?>"> <br>

@@ -20,13 +20,12 @@
             </div>
             <div class="col-md-7">
             <ul class="list-inline">
-                <li><a href="index.php">Home</a></li>
+                <li><a href="<?php if(isset($_SESSION['user_array'])){?> login_index.php <?php }if(!isset($_SESSION['user_array'])){ ?> index.php <?php } ?>">Home</a></li>
                 <li><a href="contact.php">Contact</a></li>
                 <li><a href="gallary.php">Shop</a></li>
                 <Li><a href="login.php" target="_blank">Log In</a></Li>
                 <li><a href="classes.php">Classes</a></li>
                 <li><a href="blog.php">Blog</a></li>
-                <li><a href="admin/dashboard.php">Admin</a></li>
                 
             </ul>
         </div>

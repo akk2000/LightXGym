@@ -51,7 +51,7 @@
                     <a href="admin_users.php">Users</a>
                 </li>
                 <li>
-                    <a href="#">About</a>
+                    <a href="admin_adv_articles.php">Advanced Articles</a>
                 </li>
                 <li>
                     <a href="#">Services</a>
@@ -110,7 +110,8 @@ $("#wrapper").toggleClass("toggled");
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Address</th>
-                                    <th>Delete</th>
+                                    <th>Role</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -125,7 +126,9 @@ $("#wrapper").toggleClass("toggled");
                                     <td><?php echo $post['name'] ?></td>
                                     <td><?php echo $post['email'] ?></td>
                                     <td><?php echo $post['address'] ?></td>
-                                    <td>                                       | 
+                                    <td><?php echo $post['role'] ?></td>
+                                    <td>             
+                                        <a href="edit_user.php?user_id_to_update=<?php echo $post['id']; ?>"  >Edit</a>                          | 
                                         <a href="admin_users.php?user_id_to_delete=<?php echo $post['id']; ?>" onclick="return confirm('Are you Sure want to delete?')" >Delete</a>
                                     </td>
                                 </tr>

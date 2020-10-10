@@ -32,7 +32,7 @@
         $authorError='';
         $contentError='';
 
-        if(isset($_POST['post_create_btn'])){
+        if(isset($_POST['article_create_btn'])){
 
             $image = $_FILES['image']['name'];
             $image_temp = $_FILES['image']['tmp_name'];
@@ -41,7 +41,7 @@
             move_uploaded_file($image_temp,"../upload/$image");
 
             // echo $image_temp; 
-            $insert_query = "INSERT INTO posts(image,author,content) VALUES('$image','$author','$content')";
+            $insert_query = "INSERT INTO advanced_posts(image,author,content) VALUES('$image','$author','$content')";
             
 
             if(empty($image)){
@@ -55,7 +55,9 @@
             if(!empty($image && $author && $content )){
                 mysqli_query($db, $insert_query);
                 $_SESSION["successMessage"] = "Post created Successfully";
-                header("location:admin_posts.php");
+                header("location:admin_adv_articles.php");
+            }else{
+                die('ERROR : ' . mysqli_error($db));
             }
         }
     ?>
@@ -72,11 +74,11 @@
                                 <div class="card-title">Add Posts</div>
                             </div>
                             <div class="col-md-6">
-                                <a href="admin_posts.php" class="float-right btn btn-secondary"> << Back</a>
+                                <a href="admin_adv_articles.php" class="float-right btn btn-secondary"> << Back</a>
                             </div>
                         </div>
                     </div>
-                <form action="create-post.php" method="POST" enctype="multipart/form-data">
+                <form action="create_adv_articles.php" method="POST" enctype="multipart/form-data">
                     <div class="card-body">                       
                             <div class="form-group">
                                 <label for="">Image</label><br>
@@ -99,7 +101,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <button class="btn btn-primary" name="post_create_btn">Create</button>
+                        <button class="btn btn-primary" name="article_create_btn">Create</button>
                     </div>
                 </form>
                 </div>

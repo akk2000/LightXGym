@@ -51,7 +51,7 @@
                     <a href="admin_users.php">Users</a>
                 </li>
                 <li>
-                    <a href="#">About</a>
+                    <a href="admin_adv_articles.php">Advanced Articles</a>
                 </li>
                 <li>
                     <a href="#">Services</a>

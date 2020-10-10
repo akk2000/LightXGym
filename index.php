@@ -26,7 +26,6 @@
                 <Li><a href="login.php" target="_blank">Log In</a></Li>
                 <li><a href="classes.php">Classes</a></li>
                 <li><a href="blog.php">Blog</a></li>
-                <li><a href="admin/dashboard.php">Admin</a></li>
                 
             </ul>
         </div>
@@ -37,7 +36,7 @@
     <h1 class="hero-slogan">Physical Activity Enhence the positive energy.</h1>
     <h1 class="hero-slogan">If you appreciate quality, then we are for you.</h1>
 
-     <a href="login.html" target="_blank"><button class="btn btn-hero">Become a Member</button></a>
+     <a href="register.php" target="_blank"><button class="btn btn-hero">Become a Member</button></a>
  </div>
 
  <!-- BMI -->
