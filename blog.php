@@ -28,7 +28,6 @@ require "Admin/db_connect.php";
                 <li><a href="<?php if(isset($_SESSION['user_array'])){?> login_index.php <?php }if(!isset($_SESSION['user_array'])){ ?> index.php <?php } ?>">Home</a></li>
                 <li><a href="contact.php">Contact</a></li>
                 <li><a href="gallary.php">Shop</a></li>
-                <Li><a href="login.php" target="_blank">Log In</a></Li>
                 <li><a href="classes.php">Classes</a></li>
                 <li><a href="blog.php">Blog</a></li>
                 <?php if(isset($_SESSION['user_array'])) : ?>
@@ -52,37 +51,33 @@ require "Admin/db_connect.php";
  <!-- Articles -->
  <div class="articles">
      <div class="container">
+
          <div class="row">
-             <div class="col-md-10 col-md-offset-2">
+            <div class="col-md-10 col-md-offset-2">
                 <div class="article">
-                <?php 
-                $selectQuery = "SELECT * FROM posts";
-                $result = mysqli_query($db,$selectQuery);
-                foreach($result as $post){
-             ?>
+
+                    <?php 
+                    $selectQuery = "SELECT * FROM posts";
+                    $result = mysqli_query($db,$selectQuery);
+                    foreach($result as $post){
+                    ?>
                     
-                    <img src="upload/<?php echo $post['image'] ?>" alt="" class="img-responsive"> 
+                    <img src="upload/<?php echo $post['image'] ?>" alt="" class="img-fluid "> 
 
                     <div class="article-meta">
                         <span clas="author-name">AUTHOR: <?php echo $post['author'] ?></span>
                         <span>Date:  <?php echo $post['date'] ?></span>
                     </div>
-                    <p class="blog-content"> <?php echo $post['content'] ?></p>
-    
-                </div>
 
+                    <p class="blog-content"> <?php echo $post['content'] ?></p>
                 <hr>
 
-                <?php
-                    } 
-                ?>
-
-
-
-
+                    <?php
+                        } 
+                    ?>
+                <a href="advanced_blog.php" class="btn btn-secondary btn-lg float-right">For Advanced Articles</a>>
              </div>
         </div>
-         
      </div>
  </div>
 

@@ -97,24 +97,16 @@
                             <div class="form-group">
                                 <label for="">Email</label>
                                 <input type="text" class="form-control" placeholder="" name="email" value ="<?php echo $user_array['email'] ?>"> 
-                                    
-                                   
-                                
                             </div>
 
                             <div class="form-group">
                                 <label for="">Address</label>
                                 <textarea name="address" class="form-control " placeholder=""><?php echo $user_array['address'] ?></textarea> 
-                                    
-                                
-                                
                             </div>
 
                             <div class="form-group">
                                 <label for="">Password</label>
-                                <input type="text" class="form-control" value="<?php echo $user_array['password'] ?>" name="password"> 
-                                    
-                                                              
+                                <input type="text" class="form-control" value="<?php echo $user_array['password'] ?>" name="password">                                
                             </div>
 
                             <div class="form-group">
