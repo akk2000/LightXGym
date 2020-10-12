@@ -69,6 +69,7 @@
  <div class="hero">
     <h1 class="hero-slogan">Physical Activity Enhence the positive energy.</h1>
     <h1 class="hero-slogan">If you appreciate quality, then we are for you.</h1>
+    <a href="feedback.php?userId=<?php echo $_SESSION['user_array']['id']; ?>" target="_blank"><button class="btn btn-hero">See Feedbacks</button></a>
 
      
  </div>

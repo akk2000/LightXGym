@@ -160,7 +160,17 @@ require "Admin/db_connect.php";
                 </div>
             <?php endif ?>
             </div>
-        </div>            
+        </div> 
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Your Classes</div>
+                    </div>
+                </div>
+            </div>
+        </div>           
     </div>
 <!-- Footer -->
 <div class="footer footer-fixed" stlye="position:fixed;bottom=0;">
