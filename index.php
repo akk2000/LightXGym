@@ -49,94 +49,32 @@
     </div> -->
 
 <!-- Instructor -->
-    <div class="instructors">
+<div class="instructors">
         <div class="container">
-            <h3 class="instructor-title">Instructors gods</h3>
-        <div class="row row-space">
+            <h3 class="instructor-title">Instructors</h3>
+            <div class="row row-space">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <?php 
+                        $selectQuery = "SELECT * FROM instructor";
+                        $result = mysqli_query($db,$selectQuery);
+                        foreach($result as $post){
+                    ?>
+                        <div class="instructor">
+                            <img src="upload/<?php echo $post['photo'] ?>" alt="" class="img-circle img-responsive instructor-img">
 
-            <div class="col-md-6">
-
-                <div class="instructor">
-                    <img src="img/instructor 1.jpg" alt="" class="img-circle img-responsive instructor-img">
-
-                <div class="about-instructor">
-                    <span>Arthur</span> <br>
-                    <span>25 years</span> <br>
-                    <span>Boxing Coach</span>
-                </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="instructor">
-                    <img src="img/instructor 2.jpg" alt="" class="img-circle img-responsive instructor-img">
-
-                <div class="about-instructor">
-                    <span>Ethan</span> <br>
-                    <span>22 years</span> <br>
-                    <span>Tabata Coach</span>
-                </div>
+                            <div class="about-instructor">
+                                <span><?php echo $post['name'] ?></span> <br>
+                                <span><?php echo $post['age'] ?></span> <br>
+                                <span><?php echo $post['profession'] ?></span>
+                            </div>
+                        </div>
+                        <hr>
+                        <?php
+                            } 
+                        ?>
                 </div>
             </div>
-        </div>
-
-        <div class="row row-space">
-
-            <div class="col-md-6 instructors-space">
-
-                <div class="instructor">
-                    <img src="img/instructor 3.jpg" alt="" class="img-circle img-responsive instructor-img">
-
-                <div class="about-instructor">
-                    <span>Ezra</span> <br>
-                    <span>22 years</span> <br>
-                    <span>Yoga Coach</span>
-                </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 instructors-space">
-                <div class="instructor">
-                    <img src="img/instructor 4.jpg" alt="" class="img-circle img-responsive instructor-img">
-
-                <div class="about-instructor">
-                    <span>Teddy</span> <br>
-                    <span>28 years</span> <br>
-                    <span>Cardio Coach</span>
-                </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row row-space">
-
-            <div class="col-md-6 instructors-space">
-
-                <div class="instructor">
-                    <img src="img/instructor 5.jpg" alt="" class="img-circle img-responsive instructor-img">
-
-                <div class="about-instructor">
-                    <span>Harrison</span> <br>
-                    <span>33 years</span> <br>
-                    <span>Professional Nutritionist</span>
-                </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 instructors-space">
-                <div class="instructor">
-                    <img src="img/instructor 6.jpg" alt="" class="img-circle img-responsive instructor-img">
-
-                <div class="about-instructor">
-                    <span>Sebastian</span> <br>
-                    <span>29 years</span> <br>
-                    <span>Weight Lifting Coach</span>
-                </div>
-                </div>
-            </div>
-        </div>
-
-
         </div>
     </div>
 
