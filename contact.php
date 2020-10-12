@@ -1,6 +1,14 @@
 <?php
     require "Admin/db_connect.php";
     session_start();
+
+    if(!isset($_SESSION['user_array'])){
+        header("location:login.php");
+    }else{
+        if($_SESSION['user_array']['role'] != 'user'){
+            header('location:admin/dashboard.php');
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +23,38 @@
     <title>Contact</title>
 </head>
 <body>
+
+    <?php 
+    $emailError = '';
+    $nameError = '';
+    $phoneError = '';
+    $messageError = '';
+        if(isset($_POST['contact_btn'])){
+            $userId = $_POST['userId'];
+            $email = $_POST['email'];
+            $name = $_POST['name'];
+            $phone = $_POST['phone'];
+            $message = $_POST['message'];
+
+            $insert_query = "INSERT INTO contact_info(userId,email,name,phone,message) VALUES($userId,'$email','$name','$phone','$message')";
+
+            if(empty($email)){
+                $emailError = "Email field is required";
+            }if(empty($name)){
+                $nameError = "Name fields is required";
+            }if(empty($phone)){
+                $phoneError = "Phone fields is required";
+            }if(empty($message)){
+                $messageError = "Message fields is required";
+            }
+            
+            if(!empty($email && $name && $phone && $message )){
+                mysqli_query($db, $insert_query);
+                $_SESSION["successMessage"] = "Contact Info sent Successfully! We will contact you soon";
+                // header("location:contact.php");
+            }
+        }
+    ?>
     <!-- Navigation -->
  <div class="container navigation">
             <div class="col-md-5">
@@ -51,18 +91,46 @@
  </div> -->
 
  <!-- contact form -->
+         <div class="container">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                <?php if(isset($_SESSION['successMessage'])): ?>
+                    <div class="alert alert-success alert-dismissible show" role="alert">
+                        <?php 
+                        echo  $_SESSION["successMessage"];     
+                        unset ($_SESSION["successMessage"]);                
+                        ?>
+                        <button type="button" class="close" data-dismiss="alert">  
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <?php endif ?>
+                </div>
+            </div>
+         </div>      
 <div>
     <h3 class="contact-title">Drop things for us!</h3>
 </div>
 
  <div class="contactform">
      <div class="container">
-         <input type="text" class="form-control contact-form" placeholder="Email">
-         <input type="text" class="form-control contact-form" placeholder="Name">
-         <input type="text" class="form-control contact-form" placeholder="Phone Number">
-         <input type="text" class="form-control contact-form" placeholder="Phone Number">
-         <textarea class="form-control contact-form" id="textarea1" rows="3" placeholder="Your Message..."></textarea>
-         <button class="btn btn-primary">Send</button>
+        <form action="contact.php" method="POST">
+            <input type="hidden" class="form-control contact-form" placeholder="Email" name="userId" value="<?php echo $_SESSION['user_array']['id'] ?>">
+            
+
+            <input type="text" class="form-control contact-form <?php if(!empty($emailError)) : ?>is-invalid <?php endif ?>" placeholder="Email" name="email">
+            <span class="text-danger"><?php echo $emailError ?></span>
+
+            <input type="text" class="form-control contact-form <?php if(!empty($nameError)) : ?>is-invalid <?php endif ?>" placeholder="Name" name="name">
+            <span class="text-danger"><?php echo $nameError ?></span>
+
+            <input type="text" class="form-control contact-form <?php if(!empty($phoneError)) : ?>is-invalid <?php endif ?>" placeholder="Phone Number" name="phone">
+            <span class="text-danger"><?php echo $phoneError ?></span>
+
+            <textarea class="form-control contact-form <?php if(!empty($messageError)) : ?>is-invalid <?php endif ?>" id="textarea1" rows="3" placeholder="Your Message..." name="message"><?php echo $messageError ?></textarea>
+            <button class="btn btn-primary" name="contact_btn">Send</button>
+        </form>
      </div>
  </div>
 
