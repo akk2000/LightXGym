@@ -71,11 +71,11 @@ require "Admin/db_connect.php";
     }
 
     // delete
-    if(isset($_GET['classapply_id_to_delete'])){
-        $classapply_id_to_delete = $_GET['classapply_id_to_delete'];
-        $deleteQuery = "DELETE FROM class_apply WHERE id = $classapply_id_to_delete";
+    if(isset($_GET['item_id_to_delete'])){
+        $item_id_to_delete = $_GET['item_id_to_delete'];
+        $deleteQuery = "DELETE FROM item_order WHERE id = $item_id_to_delete";
         mysqli_query($db,$deleteQuery);
-        $_SESSION["successMessage"] = "A class was deleted Successfully";
+        $_SESSION["successMessage"] = "Order was canceled Successfully";
         header('location:profile.php');
     }
 ?>
@@ -170,7 +170,7 @@ require "Admin/db_connect.php";
             <?php endif ?>
             </div>
         </div> 
-
+                <hr>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -230,11 +230,71 @@ require "Admin/db_connect.php";
                     </div>
                     
                 </div>
+
+                <hr>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Ordered Items</div>
+                    </div>
+                    <div class="card-body">
+                        <?php if(isset($_SESSION['successMessage'])): ?>
+                        <div class="alert alert-success alert-dismissible show" role="alert">
+                            <?php 
+                            echo  $_SESSION["successMessage"];     
+                            unset ($_SESSION["successMessage"]);                
+                            ?>
+                            <button type="button" class="close" data-dismiss="alert">  
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                        <?php endif ?>
+                        <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Item ID</th>
+                                        <th>Item Title</th>
+                                        <th>Unit</th>
+                                        <th>Price</th>
+                                        <th>Shipping Address</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                
+                                <?php 
+                                $userID = $_SESSION['user_array']['id'];
+                                $selectQuery = "SELECT * FROM item_order WHERE userId =$userID";
+                                $result = mysqli_query($db,$selectQuery);
+                                foreach($result as $post){
+                                ?>
+                                    <tr>
+                                        <td><?php echo $post['itemId'] ?></td>
+                                        <td><?php echo $post['itemtitle'] ?></td>
+                                        <td><?php echo $post['unit'] ?></td>
+                                        <td><?php echo $post['price'] ?></td>                                       
+                                        <td><?php echo $post['shippingaddresss'] ?></td>
+                                        <td><?php echo $post['date'] ?></td>
+                                        <td>
+                                             <a href="edit_order.php?orderId=<?php echo $post['id'];?>"  style="color:red;">Edit</a> |
+                                            <a href="profile.php?item_id_to_delete=<?php echo $post['id']; ?>" onclick="return confirm('Are you Sure want to delete?')" style="color:red;">Cancel your Order</a>
+                                        </td>
+                                    </tr>
+                                <?php
+                                } 
+                                ?>
+                                    
+                                </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
             </div>
         </div>           
     </div>
 <!-- Footer -->
-<div class="footer footer-fixed" stlye="position:fixed;bottom=0;">
+<div class="footer " >
     <div class="container">
         <div class="row">
             <div class="col-md-5 col-md-offset-1">

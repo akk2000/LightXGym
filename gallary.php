@@ -48,6 +48,17 @@
     </div>
 
     <!-- Gallary Items -->
+            <?php if(isset($_SESSION['successMessage'])): ?>
+                <div class="alert alert-success alert-dismissible show text-center" role="alert">
+                    <?php 
+                    echo  $_SESSION["successMessage"];     
+                    unset ($_SESSION["successMessage"]);                
+                    ?>
+                    <button type="button" class="close" data-dismiss="alert">  
+                        <span>&times;</span>
+                    </button>
+                </div>
+            <?php endif ?>
     <div class="container">
         <div class="col-md-5 col-md-offset-3 gallary-items ">
         <?php 
@@ -66,7 +77,7 @@
                     </div>
 
                     <div class="buy-button">
-                        <button class="btn-buy-now"> Buy Now </button>
+                        <a href="order.php?itemId=<?php echo $post['id'] ?> "><button class="btn-buy-now"> Buy Now </button></a>
                     </div>
                     </div>
                 </div>
