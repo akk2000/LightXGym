@@ -82,12 +82,12 @@ $("#wrapper").toggleClass("toggled");
 });
 </script> -->
 <?php
-    if(isset($_GET['ticket_id_to_delete'])){
-        $ticket_id_to_delete = $_GET['ticket_id_to_delete'];
-        $deleteQuery = "DELETE FROM request_ticket WHERE id = $ticket_id_to_delete";
+    if(isset($_GET['order_id_to_delete'])){
+        $order_id_to_delete = $_GET['order_id_to_delete'];
+        $deleteQuery = "DELETE FROM item_order WHERE id = $order_id_to_delete";
         mysqli_query($db,$deleteQuery);
-        $_SESSION["successMessage"] = "A ticket was deleted Successfully";
-        header('location:admin_req_ticket.php');
+        $_SESSION["successMessage"] = "An Order was deleted Successfully";
+        header('location:admin_order.php');
     }
 ?>
     <div class="container content">
@@ -97,9 +97,10 @@ $("#wrapper").toggleClass("toggled");
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="card-title">Requested Tickets</div>
+                                <div class="card-title">Order List</div>
                             </div>
                             <div class="col-md-6">
+                                
                             </div>
                         </div>
                     </div>
@@ -120,28 +121,34 @@ $("#wrapper").toggleClass("toggled");
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Class Applied ID</th>
-                                    <th>User Name</th>
-                                    <th>User Id</th>
-                                    <th>Category</th>
+                                    <th>User ID</th>
+                                    <th>Item ID</th>
+                                    <th>Item Title</th>
+                                    <th>Unit</th>
+                                    <th>Price</th>
+                                    <th>Shipping Address</th>
+                                    <th>Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                             <?php 
-                            $selectQuery = "SELECT * FROM request_ticket";
+                            $selectQuery = "SELECT * FROM item_order";
                             $result = mysqli_query($db,$selectQuery);
                             foreach($result as $post){
                             ?>
                                 <tr>
                                     <td><?php echo $post['id'] ?></td>
-                                    <td><?php echo $post['classapplied_id'] ?></td>
-                                    <td><?php echo $post['username'] ?></td>
-                                    <td><?php echo $post['userid'] ?></td>
-                                    <td><?php echo $post['category'] ?></td>
-                                    <td>                                       
-                                        <a href="admin_req_ticket.php?ticket_id_to_delete=<?php echo $post['id']; ?>" onclick="return confirm('Are you Sure want to delete?')" >Delete</a>
+                                    <td><?php echo $post['userId'] ?></td>
+                                    <td><?php echo $post['itemId'] ?></td>
+                                    <td><?php echo $post['itemtitle'] ?></td>
+                                    <td><?php echo $post['unit'] ?></td>
+                                    <td><?php echo $post['price'] ?></td>
+                                    <td><?php echo $post['shippingaddresss'] ?></td>
+                                    <td><?php echo $post['date'] ?></td>
+                                    <td>
+                                        <a href="admin_order.php?order_id_to_delete=<?php echo $post['id']; ?>" onclick="return confirm('Are you Sure want to delete?')" >Delete</a>
                                     </td>
                                 </tr>
                             <?php

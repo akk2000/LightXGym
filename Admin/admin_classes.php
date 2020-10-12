@@ -68,6 +68,9 @@
                 <li>
                     <a href="admin_req_ticket.php">Requested Tickets</a>
                 </li>
+                <li>
+                    <a href="admin_order.php">Orders</a>
+                </li>
             </ul>
         </div>
 </div>
