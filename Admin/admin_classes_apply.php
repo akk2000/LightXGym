@@ -65,6 +65,9 @@
                 <li>
                     <a href="admin_classes_apply.php">Applied Classes</a>
                 </li>
+                <li>
+                    <a href="admin_req_ticket.php">Requested Tickets</a>
+                </li>
             </ul>
         </div>
 </div>

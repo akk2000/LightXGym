@@ -74,19 +74,22 @@
                 <form action="request_tutorial.php" method="POST">
                     <div class="card-body">                       
                             <div class="form-group">
-                                <input type="text" value="<?php echo $classeAppliedId ?>" name="classeAppliedId"><br>
+                                <input type="hidden" value="<?php echo $classeAppliedId ?>" name="classeAppliedId"><br>
                                 <label for="">Username</label>
-                                <input type="text" class="form-control" placeholder="Tutorial" name="userName" value ="<?php echo $username ?>">                                                             
+                                <input type="text" class="form-control" placeholder="Tutorial" name="userName" value ="<?php echo $username ?>"> 
+                                <span class="text-danger">*This field cannot be changed!</span>                                                            
                             </div>
 
                             <div class="form-group">                               
                                 <label for="">User Id</label>
-                                <input type="text" class="form-control" placeholder="Tutorial" name="userId" value ="<?php echo $userId ?>">                                                             
+                                <input type="text" class="form-control" placeholder="Tutorial" name="userId" value ="<?php echo $userId ?>">  
+                                <span class="text-danger">*This field cannot be changed!</span>                                                              
                             </div>
 
                             <div class="form-group">                               
                                 <label for="">Category</label>
-                                <input type="text" class="form-control" placeholder="Tutorial" name="category" value ="<?php echo $category ?>">                                                             
+                                <input type="text" class="form-control" placeholder="Tutorial" name="category" value ="<?php echo $category ?>">
+                                <span class="text-danger">*This field cannot be changed!</span>                                                                
                             </div>
                              
                     </div>
