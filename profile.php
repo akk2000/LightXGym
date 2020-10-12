@@ -69,6 +69,15 @@ require "Admin/db_connect.php";
              Die('Error:' . mysqli_error($db));
          }           
     }
+
+    // delete
+    if(isset($_GET['classapply_id_to_delete'])){
+        $classapply_id_to_delete = $_GET['classapply_id_to_delete'];
+        $deleteQuery = "DELETE FROM class_apply WHERE id = $classapply_id_to_delete";
+        mysqli_query($db,$deleteQuery);
+        $_SESSION["successMessage"] = "A class was deleted Successfully";
+        header('location:profile.php');
+    }
 ?>
     <!-- Navigation -->
  <div class="container navigation">
@@ -77,7 +86,7 @@ require "Admin/db_connect.php";
         </div>
         <div class="col-md-7">
         <ul class="list-inline">
-                <li><a href="index.php">Home</a></li>
+                <li><a href="<?php if(isset($_SESSION['user_array'])){?> login_index.php <?php }if(!isset($_SESSION['user_array'])){ ?> index.php <?php } ?>">Home</a></li>
                 <li><a href="contact.php">Contact</a></li>
                 <li><a href="gallary.php">Shop</a></li>
                 <li><a href="classes.php">Classes</a></li>
@@ -168,6 +177,57 @@ require "Admin/db_connect.php";
                     <div class="card-header">
                         <div class="card-title">Your Classes</div>
                     </div>
+                    <div class="card-body">
+                        <?php if(isset($_SESSION['successMessage'])): ?>
+                        <div class="alert alert-success alert-dismissible show" role="alert">
+                            <?php 
+                            echo  $_SESSION["successMessage"];     
+                            unset ($_SESSION["successMessage"]);                
+                            ?>
+                            <button type="button" class="close" data-dismiss="alert">  
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                        <?php endif ?>
+                        <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Price</th>
+                                        <th>Instructor</th>
+                                        <th>Time</th>
+                                        <th>Date</th>
+                                        <th>Tutorial</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                <?php 
+                                $selectQuery = "SELECT * FROM class_apply";
+                                $result = mysqli_query($db,$selectQuery);
+                                foreach($result as $post){
+                                ?>
+                                    <tr>
+                                        <td><?php echo $post['category'] ?></td>
+                                        <td><?php echo $post['price'] ?></td>
+                                        <td><?php echo $post['instructor'] ?></td>
+                                        <td><?php echo $post['time'] ?></td>                                       
+                                        <td><?php echo $post['date'] ?></td>
+                                        <td><?php echo $post['tutorial'] ?></td>
+                                        <td>
+                                            <button class="btn btn-success btn-sm"><a href="edit_classes.php?postId=<?php echo $post['id']; ?>" style="color:white;">Request Online Tutorial</a></button> | 
+                                            <a href="profile.php?classapply_id_to_delete=<?php echo $post['id']; ?>" onclick="return confirm('Are you Sure want to delete?')" style="color:red;">Cancel your applied class</a>
+                                        </td>
+                                    </tr>
+                                <?php
+                                } 
+                                ?>
+                                    
+                                </tbody>
+                        </table>
+                    </div>
+                    
                 </div>
             </div>
         </div>           

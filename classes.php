@@ -120,7 +120,7 @@
                 <td><?php echo $post['category'] ?></td>
                 <td><?php echo $post['price'] ?></td>
                 <td><?php echo $post['instructor'] ?></td>
-                    <td><a href="" class="apply">Apply</a></td>
+                    <td><a href="class_confirm.php?class_id=<?php echo $post['id']?>" class="apply" >Apply</a></td>
                 </tr>
                 <?php
                     } 
