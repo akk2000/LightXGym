@@ -75,15 +75,6 @@ e.preventDefault();
 $("#wrapper").toggleClass("toggled");
 });
 </script> -->
-<?php
-    if(isset($_GET['post_id_to_delete'])){
-        $post_id_to_delete = $_GET['post_id_to_delete'];
-        $deleteQuery = "DELETE FROM classes WHERE id = $post_id_to_delete";
-        mysqli_query($db,$deleteQuery);
-        $_SESSION["successMessage"] = "A post deleted Successfully";
-        header('location:classes.php');
-    }
-?>
     <div class="container content">
         <div class="row">
             <div class="col-md-12">
@@ -91,10 +82,9 @@ $("#wrapper").toggleClass("toggled");
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="card-title">Classes List</div>
+                                <div class="card-title">Applied Classes List</div>
                             </div>
-                            <div class="col-md-6">
-                                <a href="create_classes.php" class="float-right btn btn-primary"> + Add Classes</a>
+                            <div class="col-md-6">                              
                             </div>
                         </div>
                     </div>
@@ -115,26 +105,39 @@ $("#wrapper").toggleClass("toggled");
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Action</th>
+                                    <th>User ID</th>
+                                    <th>Username</th>
+                                    <th>ClassId</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Instructor</th>
+                                    <th>Time</th>
+                                    <th>Date</th>
+                                    <th>Tutorial</th>   
+                                    <th>Action</th>                                
                                 </tr>
                             </thead>
                             <tbody>
 
                             <?php 
-                            $selectQuery = "SELECT * FROM classes";
+                            $selectQuery = "SELECT * FROM class_apply";
                             $result = mysqli_query($db,$selectQuery);
                             foreach($result as $post){
                             ?>
                                 <tr>
                                     <td><?php echo $post['id'] ?></td>
+                                    <td><?php echo $post['userId'] ?></td>
+                                    <td><?php echo $post['username'] ?></td>
+                                    <td><?php echo $post['classId'] ?></td>
                                     <td><?php echo $post['category'] ?></td>
                                     <td><?php echo $post['price'] ?></td>
                                     <td><?php echo $post['instructor'] ?></td>
+                                    <td><?php echo $post['time'] ?></td>
+                                    <td><?php echo $post['date'] ?></td>
+                                    <td><?php echo $post['tutorial'] ?></td>
                                     <td>
-                                        <a href="edit_classes.php?postId=<?php echo $post['id']; ?>">Edit</a> | 
-                                        <a href="classes.php?post_id_to_delete=<?php echo $post['id']; ?>" onclick="return confirm('Are you Sure want to delete?')" >Delete</a>
+                                         
+                                        <a href="edit_addTuto.php?classapply_id=<?php echo $post['id']; ?>" >Add tutorial</a>
                                     </td>
                                 </tr>
                             <?php

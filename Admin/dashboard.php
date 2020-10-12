@@ -65,7 +65,11 @@
                 </li>
                 <li>
                     <a href="admin_instructor.php">Instructor</a>
-                </li><br>
+                </li>
+                <li>
+                    <a href="admin_classes_apply.php">Applied Classes</a>
+                </li>
+                <br>
  
             </ul>
 
