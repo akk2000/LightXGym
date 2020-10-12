@@ -202,9 +202,10 @@ require "Admin/db_connect.php";
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                
                                 <?php 
-                                $selectQuery = "SELECT * FROM class_apply";
+                                $userID = $_SESSION['user_array']['id'];
+                                $selectQuery = "SELECT * FROM class_apply WHERE userId =$userID";
                                 $result = mysqli_query($db,$selectQuery);
                                 foreach($result as $post){
                                 ?>
@@ -216,7 +217,7 @@ require "Admin/db_connect.php";
                                         <td><?php echo $post['date'] ?></td>
                                         <td><?php echo $post['tutorial'] ?></td>
                                         <td>
-                                            <button class="btn btn-success btn-sm"><a href="edit_classes.php?postId=<?php echo $post['id']; ?>" style="color:white;">Request Online Tutorial</a></button> | 
+                                            <button class="btn btn-success btn-sm"><a href="request_tutorial.php?classeAppliedId=<?php echo $post['id']; ?>" style="color:white;">Request Online Tutorial</a></button> | 
                                             <a href="profile.php?classapply_id_to_delete=<?php echo $post['id']; ?>" onclick="return confirm('Are you Sure want to delete?')" style="color:red;">Cancel your applied class</a>
                                         </td>
                                     </tr>

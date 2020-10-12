@@ -87,29 +87,30 @@
                 <form action="class_confirm.php" method="POST" >
                     <div class="card-body">                       
                             <div class="form-group">
-                                <input type="text" class="form-control" name="userId" value ="<?php echo $_SESSION['user_array']['id'] ?>">  
+                                <input type="hidden" class="form-control" name="userId" value ="<?php echo $_SESSION['user_array']['id'] ?>">  
                                                
-                                <input type="text" class="form-control"  name="userName" value ="<?php echo $_SESSION['user_array']['name']  ?>">  
+                                <input type="hidden" class="form-control"  name="userName" value ="<?php echo $_SESSION['user_array']['name']  ?>">  
 
-                                <input type="text" class="form-control"  name="classId" value ="<?php echo $class_id  ?>">       
+                                <input type="hidden" class="form-control"  name="classId" value ="<?php echo $class_id  ?>">       
                             </div>
 
                             <div class="form-group">
-                                <label for="">Category</label>
+                                <label for="">Category</label><br>
+                                
                                 <input type="text" class="form-control"  name="category" value ="<?php echo $category  ?>" > 
-                                <span class="text-danger"><?php echo $contentError ?></span>                           
+                                <span class="text-danger">This Field Cannot be changed!</span>                          
                             </div>
 
                             <div class="form-group">
                                 <label for="">Price</label>
                                 <input type="text" class="form-control"  name="price" value ="<?php echo $price  ?>" > 
-                                <span class="text-danger"><?php echo $contentError ?></span>                           
+                                <span class="text-danger">This Field Cannot be changed!</span>                          
                             </div>
 
                             <div class="form-group">
                                 <label for="">Instructor</label>
                                 <input type="text" class="form-control"  name="instructor" value ="<?php echo $instructor  ?> "  > 
-                                <span class="text-danger"><?php echo $contentError ?></span>                           
+                                <span class="text-danger">This Field Cannot be changed!</span>                           
                             </div>
 
                             <div class="form-group">
