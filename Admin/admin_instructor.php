@@ -16,9 +16,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
     <link rel="stylesheet" href="../style.css">
 
 
@@ -60,23 +60,22 @@
                     <a href="admin_instructor.php">Instructor</a>
                 </li>
             </ul>
-        </div>
+        </div>>
 </div>
 
-<script>
-$("#menu-toggle").click(function(e) {
+<!-- <script>
+("#menu-toggle").click(function(e) {
 e.preventDefault();
 $("#wrapper").toggleClass("toggled");
 });
-</script>
-<!-- Delete -->
+</script> -->
 <?php
-    if(isset($_GET['item_id_to_delete'])){
-        $item_id_to_delete = $_GET['item_id_to_delete'];
-        $deleteQuery = "DELETE FROM inventory WHERE id = $item_id_to_delete";
+    if(isset($_GET['instructor_id_to_delete'])){
+        $instructor_id_to_delete = $_GET['instructor_id_to_delete'];
+        $deleteQuery = "DELETE FROM instructor WHERE id = $instructor_id_to_delete";
         mysqli_query($db,$deleteQuery);
-        $_SESSION["successMessage"] = "A Item was deleted Successfully";
-        header('location:inventory.php');
+        $_SESSION["successMessage"] = "A post deleted Successfully";
+        header('location:admin_instructor.php');
     }
 ?>
     <div class="container content">
@@ -89,16 +88,14 @@ $("#wrapper").toggleClass("toggled");
                                 <div class="card-title">Classes List</div>
                             </div>
                             <div class="col-md-6">
-                                <a href="create_item.php" class="float-right btn btn-primary"> + Add Items</a>
+                                <a href="create_instructor.php" class="float-right btn btn-primary"> + Add Instructors</a>
                             </div>
                         </div>
                     </div>
 
                     <div class="card-body">
-
-                        <!-- Success Message -->
                     <?php if(isset($_SESSION['successMessage'])): ?>
-                        <div class="alert alert-success alert-dismissible show" role="alert">
+                    <div class="alert alert-success alert-dismissible show" role="alert">
                         <?php 
                         echo  $_SESSION["successMessage"];     
                         unset ($_SESSION["successMessage"]);                
@@ -106,33 +103,35 @@ $("#wrapper").toggleClass("toggled");
                         <button type="button" class="close" data-dismiss="alert">  
                             <span>&times;</span>
                         </button>
-                        </div>
+                    </div>
                     <?php endif ?>
-
                     <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Image</th>
-                                    <th>TItle</th>
-                                    <th>Price</th>
+                                    <th>Photo</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Profession</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                             <?php 
-                            $selectQuery = "SELECT * FROM inventory";
+                            $selectQuery = "SELECT * FROM instructor";
                             $result = mysqli_query($db,$selectQuery);
                             foreach($result as $post){
                             ?>
                                 <tr>
                                     <td><?php echo $post['id'] ?></td>
-                                    <td><?php echo $post['item_image'] ?></td>
-                                    <td><?php echo $post['item_title'] ?></td>
-                                    <td><?php echo $post['price'] ?></td>
+                                    <td><?php echo $post['photo'] ?></td>
+                                    <td><?php echo $post['name'] ?></td>
+                                    <td><?php echo $post['age'] ?></td>
+                                    <td><?php echo $post['profession'] ?></td>
                                     <td>
-                                        <a href="edit_item.php?itemId=<?php echo $post['id']; ?>">Edit</a> | 
-                                        <a href="inventory.php?item_id_to_delete=<?php echo $post['id']; ?>" onclick="return confirm('Are you Sure want to delete?')" >Delete</a>
+                                        <a href="edit_instructor.php?instructorId=<?php echo $post['id']; ?>">Edit</a> | 
+                                        <a href="admin_instructor.php?instructor_id_to_delete=<?php echo $post['id']; ?>" onclick="return confirm('Are you Sure want to delete?')" >Delete</a>
                                     </td>
                                 </tr>
                             <?php

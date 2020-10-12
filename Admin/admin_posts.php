@@ -57,7 +57,7 @@
                     <a href="admin_feedback.php">Feedback</a>
                 </li>
                 <li>
-                    <a href="#">Contact</a>
+                    <a href="admin_instructor.php">Instructor</a>
                 </li>
             </ul>
         </div>
