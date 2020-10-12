@@ -73,12 +73,12 @@ $("#wrapper").toggleClass("toggled");
 });
 </script> -->
 <?php
-    if(isset($_GET['feedback_id_to_delete'])){
-        $feedback_id_to_delete = $_GET['feedback_id_to_delete'];
-        $deleteQuery = "DELETE FROM feedback WHERE feedback_id = $feedback_id_to_delete";
+    if(isset($_GET['contact_id_to_delete'])){
+        $contact_id_to_delete = $_GET['contact_id_to_delete'];
+        $deleteQuery = "DELETE FROM contact_info WHERE id = $contact_id_to_delete";
         mysqli_query($db,$deleteQuery);
-        $_SESSION["successMessage"] = "A post deleted Successfully";
-        header('location:admin_feedback.php');
+        $_SESSION["successMessage"] = "A Contact Info Was deleted Successfully";
+        header('location:admin_contact.php');
     }
 ?>
     <div class="container content">
@@ -88,10 +88,10 @@ $("#wrapper").toggleClass("toggled");
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="card-title">Feedback List</div>
+                                <div class="card-title">Classes List</div>
                             </div>
                             <div class="col-md-6">
-                                
+                                <a href="create_classes.php" class="float-right btn btn-primary"> + Add Classes</a>
                             </div>
                         </div>
                     </div>
@@ -112,8 +112,10 @@ $("#wrapper").toggleClass("toggled");
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Username</th>
-                                    <th>Title</th>
+                                    <th>User ID</th>
+                                    <th>Email</th>
+                                    <th>Name</th>
+                                    <th>Phone Number</th>
                                     <th>Message</th>
                                     <th>Action</th>
                                 </tr>
@@ -121,17 +123,19 @@ $("#wrapper").toggleClass("toggled");
                             <tbody>
 
                             <?php 
-                            $selectQuery = "SELECT * FROM feedback";
+                            $selectQuery = "SELECT * FROM contact_info";
                             $result = mysqli_query($db,$selectQuery);
                             foreach($result as $post){
                             ?>
                                 <tr>
-                                    <td><?php echo $post['feedback_id'] ?></td>
-                                    <td><?php echo $post['username'] ?></td>
-                                    <td><?php echo $post['title'] ?></td>
-                                    <td><?php echo $post['content'] ?></td>
+                                    <td><?php echo $post['id'] ?></td>
+                                    <td><?php echo $post['userId'] ?></td>
+                                    <td><?php echo $post['email'] ?></td>
+                                    <td><?php echo $post['name'] ?></td>    
+                                    <td><?php echo $post['phone'] ?></td>
+                                    <td><?php echo $post['message'] ?></td>
                                     <td>
-                                        <a href="admin_feedback.php?feedback_id_to_delete=<?php echo $post['feedback_id']; ?>" onclick="return confirm('Are you Sure want to delete?')" >Delete</a>
+                                        <a href="admin_contact.php?contact_id_to_delete=<?php echo $post['id']; ?>" onclick="return confirm('Are you Sure want to delete?')" >Delete</a>
                                     </td>
                                 </tr>
                             <?php

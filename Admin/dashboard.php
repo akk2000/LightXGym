@@ -61,6 +61,9 @@
                     <a href="admin_feedback.php">Feedback</a>
                 </li>
                 <li>
+                    <a href="admin_contact.php">Contact Info</a>
+                </li>
+                <li>
                     <a href="admin_instructor.php">Instructor</a>
                 </li><br>
  
