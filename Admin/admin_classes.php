@@ -87,7 +87,7 @@ $("#wrapper").toggleClass("toggled");
         $deleteQuery = "DELETE FROM classes WHERE id = $post_id_to_delete";
         mysqli_query($db,$deleteQuery);
         $_SESSION["successMessage"] = "A post deleted Successfully";
-        header('location:classes.php');
+        header('location:admin_classes.php');
     }
 ?>
     <div class="container content">
@@ -140,7 +140,7 @@ $("#wrapper").toggleClass("toggled");
                                     <td><?php echo $post['instructor'] ?></td>
                                     <td>
                                         <a href="edit_classes.php?postId=<?php echo $post['id']; ?>">Edit</a> | 
-                                        <a href="classes.php?post_id_to_delete=<?php echo $post['id']; ?>" onclick="return confirm('Are you Sure want to delete?')" >Delete</a>
+                                        <a href="admin_classes.php?post_id_to_delete=<?php echo $post['id']; ?>" onclick="return confirm('Are you Sure want to delete?')" >Delete</a>
                                     </td>
                                 </tr>
                             <?php

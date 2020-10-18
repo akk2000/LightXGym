@@ -44,9 +44,11 @@
     $contentError='';
     if(isset($_POST['update_post_btn'])){
         $postId = $_POST['postId'];
-        $image = $_POST['image'];
+        $image = $_FILES['image']['name'];
+        $image_temp = $_FILES['image']['tmp_name'];
         $author = $_POST['author'];
         $content = $_POST['content'];
+        move_uploaded_file($image_temp,"../upload/$image");
         $Updatequery = "UPDATE advanced_posts SET image='$image', author='$author', content='$content' WHERE id = $postId";
 
         if(empty($image)){
@@ -81,7 +83,7 @@
                             </div>
                         </div>
                     </div>
-                <form action="edit_adv_articles.php" method="POST">
+                <form action="edit_adv_articles.php" method="POST" enctype="multipart/form-data">
                     <div class="card-body">                       
                             <div class="form-group">
                                 <input type="hidden" name="postId" value="<?php echo $postIdToUpdate; ?>"> <br>

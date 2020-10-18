@@ -45,10 +45,12 @@
     $imageError = '';
     if(isset($_POST['update_instructor_btn'])){
         $instructorId = $_POST['instructorId'];
-        $image = $_POST['image'];
+        $image = $_FILES['image']['name'];
+        $image_temp = $_FILES['image']['tmp_name'];
         $name = $_POST['name'];
        $age = $_POST['age'];
        $profession = $_POST['profession'];
+       move_uploaded_file($image_temp,"../upload/$image");
         $Updatequery = "UPDATE instructor SET photo='$image',name='$name', age='$age', profession='$profession' WHERE id = $instructorId";
 
         if(empty($name)){
@@ -85,7 +87,7 @@
                             </div>
                         </div>
                     </div>
-                <form action="edit_instructor.php" method="POST">
+                <form action="edit_instructor.php" method="POST" enctype="multipart/form-data">
                     <div class="card-body">                       
                             <div class="form-group">
                                 <input type="hidden" name="instructorId" value="<?php echo $instructorIdToUpdate; ?>"> <br>

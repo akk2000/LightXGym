@@ -48,10 +48,10 @@
         $itemId = $_POST['itemId'];
 
         $image = $_FILES['image']['name'];
-        $image_temp = $_FILES['image']['tmp_name'];
-        move_uploaded_file($image_temp,"../upload/$item_image");
+        $image_temp = $_FILES['image']['tmp_name'];       
         $title = $_POST['title'];
         $price = $_POST['price'];
+        move_uploaded_file($image_temp,"../upload/$image");
         
         $Updatequery = "UPDATE inventory SET item_image='$image', item_title='$title', price='$price' WHERE id = $itemId";
 

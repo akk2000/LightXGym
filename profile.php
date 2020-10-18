@@ -60,6 +60,7 @@ require "Admin/db_connect.php";
         }else{
             $new_password = $password;
         }
+
         $Updatequery = "UPDATE user SET name='$name', email='$email', address='$address', password = '$new_password' WHERE id = $id";
          if($Updatequery){
             mysqli_query($db, $Updatequery);
@@ -155,6 +156,11 @@ require "Admin/db_connect.php";
                             <div class="form-group">
                                 <label for="">Address</label>
                                 <textarea name="address" class="form-control " placeholder=""><?php echo $user_array['address'] ?></textarea> 
+                            </div>
+
+                            <div class="form-group">
+                                
+                                <input type="hidden" class="form-control" placeholder="" name="password" value ="<?php echo $user_array['password'] ?>">                                     
                             </div>
 
 
