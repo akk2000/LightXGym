@@ -139,7 +139,7 @@ require "Admin/db_connect.php";
                         <div class="card-body">
 
                             <div class="form-group">
-                                <input type="text" name="id" value="<?php echo $user_array['id'] ?>"> <br>
+                                <input type="hidden" name="id" value="<?php echo $user_array['id'] ?>"> <br>
                             </div>
 
                             <div class="form-group">
@@ -157,10 +157,7 @@ require "Admin/db_connect.php";
                                 <textarea name="address" class="form-control " placeholder=""><?php echo $user_array['address'] ?></textarea> 
                             </div>
 
-                            <div class="form-group">
-                                <label for="">Password</label>
-                                <input type="text" class="form-control" value="<?php echo $user_array['password'] ?>" name="password">                                
-                            </div>
+
                         </div>
                         <div class="card-footer">
                             <button class="btn btn-success" name="update_user_btn">Update</button>
